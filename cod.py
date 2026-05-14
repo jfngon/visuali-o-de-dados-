@@ -61,7 +61,7 @@ def carregar_dados():
 df = carregar_dados()
 
 if df is not None:
-    st.title("📊 Gestão e Visualização de Indicadores Orçamentários")
+    st.title("📊 Gestão e Visualização de Indicadores Orçamentários esfera Federal")
     st.sidebar.header("Navegação do Projeto")
     
     menu = st.sidebar.radio("Selecione a Unidade:", 
@@ -73,7 +73,7 @@ if df is not None:
 
     # --- ABA: RESUMO GERAL ---
     if menu == "🏠 Resumo Geral":
-        st.subheader("Indicadores Consolidados")
+            st.subheader("Ranking de Investimento por Órgão entre 01/01/2026 a 15/01/2026")
 
         mapa_orgao = {}
         if os.path.exists('lista_codigo.csv'):
