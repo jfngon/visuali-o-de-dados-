@@ -1,6 +1,7 @@
+scipy
 pandas
 streamlit
-networkx
 plotly
-scipy
+networkx
+os
 
