@@ -13,7 +13,7 @@ st.set_page_config(
 )
 
 # NOME DO ARQUIVO CONSOLIDADO
-ARQUIVO_CSV = 'Despesas_Empenhadas.csv'
+ARQUIVO_CSV = 'despesas_empenhadas.csv'
 
 @st.cache_data
 def carregar_dados():
@@ -278,25 +278,31 @@ if df is not None:
         )
 
         st.plotly_chart(fig, use_container_width=True)
-        st.markdown("Órgãos Com Maiores Empenhos")
+        
+        # --- Seção da Tabela/Lista de Órgãos ---
+        st.markdown("### Lista de Referência dos Top 15 no Ranking de Empenhos")
 
         if os.path.exists('lista_codigo.csv'):
             df_cod = pd.read_csv('lista_codigo.csv', sep=';', encoding='latin-1', header=0)
             df_cod.columns = [c.strip().lower() for c in df_cod.columns]
+            
             col_codigo = 'codigo' if 'codigo' in df_cod.columns else df_cod.columns[0]
             col_orgao = 'orgao_superior' if 'orgao_superior' in df_cod.columns else df_cod.columns[1]
 
-            orgs_exibidos = df_tm['Orgao_Superior'].unique().tolist()
+            orgs_exibidos = df_tm['Orgao_Superior'].unique()
+            
+            df_lista_final = pd.DataFrame({'codigo_str': [str(x).strip() for x in orgs_exibidos]})
             df_cod['codigo_str'] = df_cod[col_codigo].astype(str).str.strip()
+            
+            df_lista_final = df_lista_final.merge(df_cod[['codigo_str', col_orgao]], on='codigo_str', how='left')
+            
+            df_lista_final[col_orgao] = df_lista_final[col_orgao].fillna(df_lista_final['codigo_str'])
+            
+            df_lista_final['exibicao'] = df_lista_final['codigo_str'] + " — " + df_lista_final[col_orgao]
 
-            df_cod_filtrado = df_cod[df_cod['codigo_str'].isin([str(x).strip() for x in orgs_exibidos])].copy()
-            mapa_nome = dict(zip(df_cod_filtrado['codigo_str'], df_cod_filtrado[col_orgao]))
-
-            for cod_org in orgs_exibidos:
-                cod_org_str = str(cod_org).strip()
-                nome_org = mapa_nome.get(cod_org_str, cod_org_str)
-                # Exibir: código do órgão + nome do órgão
-                st.write(f"{cod_org_str} — {nome_org}")
+            lista_texto = "\n\n".join(df_lista_final['exibicao'].tolist())
+            
+            st.markdown(lista_texto)
 
         else:
             st.caption("Arquivo lista_codigo.csv não encontrado.")
