@@ -61,7 +61,7 @@ def carregar_dados():
 df = carregar_dados()
 
 if df is not None:
-    st.title("📊 Gestão e Visualização de Indicadores Orçamentários esfera Federal")
+    st.title("📊 Gestão e Visualização de Indicadores Orçamentários")
     st.sidebar.header("Navegação do Projeto")
     
     menu = st.sidebar.radio("Selecione a Unidade:", 
