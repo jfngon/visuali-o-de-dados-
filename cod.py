@@ -73,7 +73,7 @@ if df is not None:
 
     # --- ABA: RESUMO GERAL ---
     if menu == "🏠 Resumo Geral":
-            st.subheader("Indicadores Consolidados entre 01/01/2026 a 15/01/2026")
+            st.subheader("Indicadores Consolidados")
 
         mapa_orgao = {}
         if os.path.exists('lista_codigo.csv'):
