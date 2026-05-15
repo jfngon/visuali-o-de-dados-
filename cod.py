@@ -162,7 +162,8 @@ if df is not None:
 
         st.markdown("**Dados em Formato Tabular**")
         st.dataframe(df_tabela.head(9486), use_container_width=True, height='stretch')
-
+        st.write("🔗 Link da Fonte de Dados Utilizada: ")
+        st.link_button("Portal da Transparência", "https://portaldatransparencia.gov.br/download-de-dados/despesas")
 
   # --- ABA: (TEMPORAL) ---
     elif menu == "📅 Temporal":
