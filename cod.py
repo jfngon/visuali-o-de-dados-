@@ -96,7 +96,7 @@ if df is not None:
         c3.metric("Total de Fornecedores", n_fornec)
         
         df_ordenado = df.copy()
-        df_ordenado['Data_fmt'] = df_ordenado['Data'].dt.strftime('%d/%m/%Y')
+        df_ordenado['Data_fmt'] = df_ordenado['Data'].dt.strftime('%m/%d/%Y')
 
         df_ordenado = df_ordenado.sort_values(
             ['Orgao_Superior', 'Data', 'Fornecedor', 'Valor'],
@@ -120,10 +120,9 @@ if df is not None:
         colunas_saida = [c for c in colunas_saida if c is not None]
 
         if 'data_fmt' in df_ordenado.columns:
-            df_ordenado['data_fmt'] = pd.to_datetime(df_ordenado['data_fmt'], errors='coerce').dt.strftime('%d/%m/%Y')
-
-        df_ordenado['data_fornecedor_fmt'] = pd.to_datetime(df_ordenado['Data'], errors='coerce').dt.strftime('%d/%m/%Y')
-        df_ordenado['valor_orgao_ref'] = df_ordenado['Valor']
+            df_ordenado['data_fmt'] = pd.to_datetime(df_ordenado['data_fmt'], errors='coerce').dt.strftime('%m/%d/%Y')
+            df_ordenado['data_fornecedor_fmt'] = pd.to_datetime(df_ordenado['Data'], errors='coerce').dt.strftime('%d/%m/%Y')
+            df_ordenado['valor_orgao_ref'] = df_ordenado['Valor']
 
         def br_valor(x):
             try:
