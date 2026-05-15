@@ -214,7 +214,7 @@ if df is not None:
         fig.update_layout(
             yaxis={'categoryorder': 'total ascending'},
             showlegend=False,
-            height=720,
+            height=700,
             margin=dict(l=40, r=20, t=60, b=40),
         )
 
