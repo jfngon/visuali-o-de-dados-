@@ -162,6 +162,7 @@ if df is not None:
         st.markdown("**Dados em Formato Tabular**")
         st.dataframe(df_tabela.head(9486), use_container_width=True, height='stretch')
         st.write("🔗 Link da Fonte de Dados Utilizada: ")
+        st.write("Os dados utilizados refere-se à 1º quinzena de janeiro de 2026 extraidos do Portal da Transparência do Governo Federal")
         st.link_button("Portal da Transparência", "https://portaldatransparencia.gov.br/download-de-dados/despesas")
 
   # --- ABA: (TEMPORAL) ---
